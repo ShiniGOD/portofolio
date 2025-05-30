@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonatan Eldo Kusuma - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-container.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #007bff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1001;
+        }
+
+        .chatbot-toggle i {
+            font-size: 24px;
+        }
+
+        .chat-container {
+            width: 100%;
+            margin: 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-family: 'Segoe UI', sans-serif;
+            background: white;
+        }
+
+        .chat-header {
+            padding: 15px;
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin: 12px 0;
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .user-message {
+            background: #007bff;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bot-message {
+            background: #e9ecef;
+            color: #212529;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        #send-btn {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #send-btn:hover {
+            background: #0056b3;
+        }
+
+        .typing-indicator {
+            padding: 10px 15px;
+            display: none;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Jonatan Eldo Kusuma</h1>
+            <p>Student | Programmer | Tech Enthusiast</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#portfolio">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <img src="/foto6.jpeg" alt="Jonatan Eldo Kusuma" class="profile-img">
+                <div class="about-text">
+                    <p>Hello! I'm Jonatan Eldo Kusuma, an 18-year-old student passionate about programming and technology.</p>
+                    <p>I have experience in multiple programming languages including HTML, CSS, JavaScript, Python, C++, and C. I enjoy creating web applications and solving complex problems through code.</p>
+                    <p>As a lifelong learner, I'm constantly expanding my skillset and exploring new technologies to build innovative solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section">
+        <div class="container">
+            <h2>My Projects</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="/abstract-blue-background-simple-design-for-your-website-free-vector.jpg" alt="Web Development Project">
+                    <h3>Web Application</h3>
+                    <p>A responsive web app built with HTML, CSS, and JavaScript.</p>
+                </div>
+                <div class="portfolio-item">
+                    <img src="/logopy.png" alt="Python Project">
+                    <h3>Pygames</h3>
+                    <p>A Python application to make games.</p>
+                </div>
+                <div class="portfolio-item">
+                    <img src="/c.png" alt="C++ Project">
+                    <h3>C And C++ </h3>
+                    <p>A console application developed in C++ with advanced features.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="experience" class="section">
+        <div class="container">
+            <h2>My Experience</h2>
+            <div class="experience-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="education">Education</button>
+                    <button class="tab-btn" data-tab="coding">Coding Journey</button>
+                    <button class="tab-btn" data-tab="projects">Early Projects</button>
+                </div>
+                
+                <div class="tab-content active" id="education">
+                    <h3>Formal Education</h3>
+                    <ul class="experience-list">
+                        <li>
+                            <h4>High School Graduate (SMA 2 Tanjungpinang)</h4>
+                            <p>Tanjungpinang, Kepulauan Riau</p>
+                            <p>2021 - 2024</p>
+                            <p>Completed general high school education while self-learning programming</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" id="coding">
+                    <h3>Coding Journey</h3>
+                    <ul class="experience-list">
+                        <li>
+                            <h4>Self-Taught Programmer</h4>
+                            <p>2018 - Present</p>
+                            <p>Started learning Python through online resources and documentation</p>
+                            <p>Expanded to web development (HTML/CSS/JavaScript) in 2021</p>
+                            <p>Learned C/C++ for fundamental programming concepts</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" id="projects">
+                    <h3>Early Projects</h3>
+                    <ul class="experience-list">
+                        <li>
+                            <h4>Roblox Game Development</h4>
+                            <p>2019</p>
+                            <p>Created simple games using Roblox Studio and Lua scripting</p>
+                            <p>Learned basic game design principles and logic implementation</p>
+                        </li>
+                        <li>
+                            <h4>Python Applications</h4>
+                            <p>2022</p>
+                            <p>Built various console applications including calculators, simple games, and automation scripts</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2>My Skills</h2>
+            <div class="skills-container">
+                <div class="skill">
+                    <h3>HTML/CSS</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level html">95%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>JavaScript</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level js">60%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>Python</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level python">45%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>C++</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level cpp">70%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>C</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level c">70%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> Jonatan Eldo Kusuma. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Chatbot Elements -->
+    <div class="chatbot-toggle" id="chatbot-toggle">
+        <i class="fas fa-robot"></i>
+    </div>
+    
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chat-container">
+            <div class="chat-header">
+                <span>Portfolio Assistant</span>
+                <button id="close-chat" style="background:none;border:none;color:white;cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot-message">Halo! Saya asisten virtual Anda. 🎉</div>
+            </div>
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="dot-flashing"></div>
+                Sedang mengetik...
+            </div>
+            <div class="chat-input">
+                <input type="text" id="user-input" placeholder="Ketik pesan disini...">
+                <button id="send-btn">Kirim</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Chatbot Script
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const typingIndicator = document.getElementById('typing-indicator');
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const closeChat = document.getElementById('close-chat');
+
+        // Toggle chatbot visibility
+        chatbotToggle.addEventListener('click', () => {
+            chatbotContainer.classList.toggle('active');
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatbotContainer.classList.remove('active');
+        });
+
+        // Enhanced response system with Indonesian slang support
+        const responseGroups = [
+            {
+                triggers: ['halo', 'hai', 'hei', 'p', 'oi', 'bro', 'sis'],
+                responses: [
+                    "Halo! Ada yang bisa saya bantu? 😊",
+                    "Hai! Hari ini mau tanya apa?",
+                    "Hei! Langsung saja, apa kebutuhan Anda?",
+                    "Halo! Senang bisa membantu Anda hari ini 🌟"
+                ]
+            },
+            {
+                triggers: ['apa kabar', 'kabarmu', 'gimana', 'kabar'],
+                responses: [
+                    "Alhamdulillah baik! Anda bagaimana? 😇",
+                    "Saya bot jadi selalu siap membantu! 💪",
+                    "Sedang semangat nih, ada yang bisa dibantu? 🚀"
+                ]
+            },
+            {
+                triggers: ['terima kasih', 'makasih', 'trims', 'thanks', 'tengkyu'],
+                responses: [
+                    "Sama-sama! Senang bisa membantu 😊",
+                    "Jangan sungkan untuk bertanya lagi ya!",
+                    "Dengan senang hati! 👍"
+                ]
+            },
+            {
+                triggers: ['bantuan', 'tolong', 'help', 'bantu'],
+                responses: [
+                    "Tentu! Coba jelaskan kebutuhan Anda...",
+                    "Saya siap membantu. Apa yang Anda butuhkan?",
+                    "Ceritakan masalah Anda, saya akan coba bantu 🤔"
+                ]
+            },
+            {
+                triggers: ['portfolio', 'proyek', 'project', 'karya'],
+                responses: [
+                    "Anda bisa melihat proyek saya di bagian Projects di atas!",
+                    "Scroll ke bagian Projects untuk melihat karya-karya saya.",
+                    "Saya punya beberapa proyek menarik di bagian Projects portfolio ini."
+                ]
+            },
+            {
+                triggers: ['skill', 'kemampuan', 'keahlian'],
+                responses: [
+                    "Skill utama saya ada di bagian Skills. Coba lihat ya!",
+                    "Saya menguasai HTML, CSS, JavaScript, Python, C++, dan C. Lihat detailnya di bagian Skills.",
+                    "Scroll ke atas ke bagian Skills untuk melihat kemampuan teknis saya."
+                ]
+            }
+        ];
+
+        const defaultResponses = [
+            "Maaf saya belum paham, bisa dijelaskan dengan cara lain?",
+            "Wah pertanyaan menarik! Bisa diperjelas maksudnya?",
+            "Sepertinya saya perlu belajar lagi nih 😅",
+            "Coba gunakan kata kunci yang berbeda ya..."
+        ];
+
+        // Improved message processing with typo tolerance
+        function processInput(text) {
+            return text.toLowerCase()
+                .replace(/[^a-z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ ]/g, ' ')
+                .replace(/\b(bg|dng|yg|tdk|gmn|brp|sblm)\b/g, match => ({
+                    'bg': 'bang', 'dng': 'dengan', 'yg': 'yang', 
+                    'tdk': 'tidak', 'gmn': 'gimana', 'brp': 'berapa',
+                    'sblm': 'sebelum'
+                }[match]))
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function findBestResponse(processedText) {
+            // Priority 1: Exact match
+            for (const group of responseGroups) {
+                for (const trigger of group.triggers) {
+                    if (processedText.includes(trigger)) {
+                        return group.responses[Math.floor(Math.random() * group.responses.length)];
+                    }
+                }
+            }
+
+            // Priority 2: Partial match (3 first letters)
+            for (const group of responseGroups) {
+                for (const trigger of group.triggers) {
+                    if (processedText.includes(trigger.substring(0, 3))) {
+                        return group.responses[Math.floor(Math.random() * group.responses.length)];
+                    }
+                }
+            }
+
+            // Priority 3: Default response
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        }
+
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function handleUserInput() {
+            const rawInput = userInput.value.trim();
+            if (!rawInput) return;
+
+            addMessage(rawInput, true);
+            userInput.value = '';
+            
+            typingIndicator.style.display = 'block';
+            
+            await new Promise(resolve => setTimeout(resolve, 800));
+            
+            typingIndicator.style.display = 'none';
+            const processedText = processInput(rawInput);
+            const response = findBestResponse(processedText);
+            addMessage(response);
+        }
+
+        // Event handling
+        sendBtn.addEventListener('click', handleUserInput);
+        userInput.addEventListener('keypress', e => e.key === 'Enter' && handleUserInput());
+
+        // Initial setup
+        setTimeout(() => {
+            addMessage("Coba ketik:");
+            addMessage("- 'Halo' 👋");
+            addMessage("- 'Apa kabar?' 😊");
+            addMessage("- 'Butuh bantuan' 🆘");
+            addMessage("- 'Skill apa yang kamu miliki?' 💻");
+        }, 1000);
+    </script>
+</body>
+</html>
