@@ -125,7 +125,7 @@ const responseGroups = [
     {
         triggers: ['nama', 'siapa nama', 'panggil', 'namamu'],
         responses: [
-            "Saya adalah asisten virtual Jonatan. Siap membantu Anda!",
+            "Saya adalah asisten virtual dikembangkan Jonatan. Siap membantu Anda!",
             "Nama saya Asisten Portofolio Jonatan. Ada yang bisa saya bantu?",
             "Saya bot asisten untuk portofolio Jonatan Eldo Kusuma. Senang berkenalan!"
         ]
